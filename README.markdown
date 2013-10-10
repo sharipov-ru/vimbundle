@@ -24,6 +24,10 @@ Open vim/mvim/gvim and execute comand:
 
     :BundleInstall
 
+Also follow installation guides for vim plugins:
+
+[ack](https://github.com/mileszs/ack.vim)
+
 Enjoy!
 
 ### TODO
