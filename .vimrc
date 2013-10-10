@@ -9,15 +9,15 @@ set tabstop=2                                  " 1 hard tab == 2 spaces
 set shiftwidth=2                               " > and < commands shifts by 2
 set hlsearch
 set cursorline                                 " highlight the current line
-set colorcolumn=80                             " show 80-digit limit line
+" set colorcolumn=80                             " show 80-digit limit line
 set so=999
 set nocompatible                               " be iMproved
 set nofoldenable                               " turn off folding
 set laststatus=2                               " always show status line
+set clipboard=unnamed
 
 syntax on
 filetype off                                   " required!
-filetype plugin on
 colorscheme railscasts
 " set spell
 " setlocal spell spelllang=ru_yo,en_us
@@ -28,6 +28,9 @@ call vundle#rc()
 
 " Set ruby format for rabl files
 au BufRead,BufNewFile *.rabl setf ruby
+
+" Open NERDTree when no file was specified
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " Compile coffee files
 " au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
@@ -87,11 +90,12 @@ Bundle 'scrooloose/nerdtree'
 " Tag bar with class/instance methods
 Bundle 'majutsushi/tagbar'
 
-" Ruby/Rails support
+" Ruby/Rails/RSpec support
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
 Bundle 'henrik/vim-ruby-runner'
+Bundle 'skwp/vim-rspec'
 
 " Git tools
 Bundle 'tpope/vim-fugitive'
@@ -99,13 +103,15 @@ Bundle 'vim-scripts/Git-Branch-Info'
 Bundle 'kablamo/vim-git-log'
 Bundle 'gregsexton/gitv'
 Bundle 'mattn/gist-vim'
+" Bundle 'airblade/vim-gitgutter'
 
-" jQuery/Coffescript/LESS/SASS/Zencoding support
+" jQuery/Coffescript/LESS/SASS/SLIM/Zencoding support
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'itspriddle/vim-jquery'
 Bundle 'groenewege/vim-less'
 Bundle 'firegoby/SASS-Snippets'
 Bundle 'mattn/zencoding-vim'
+Bundle 'slim-template/vim-slim'
 
 " markdown support
 Bundle 'plasticboy/vim-markdown'
@@ -114,6 +120,9 @@ Bundle 'nelstrom/vim-markdown-preview'
 " web api
 Bundle 'mattn/webapi-vim'
 
+" evernote
+Bundle 'kakkyz81/evervim'
+
 " Text objects
 Bundle 'kana/vim-textobj-user'
 Bundle 'kana/vim-textobj-entire'
@@ -121,6 +130,13 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized'
+
+" Coloresque
+Bundle 'gorodinskiy/vim-coloresque'
+
+filetype on
+filetype indent on
+filetype plugin on
 
 " Custom general mappings
 map 0 ^
@@ -132,8 +148,8 @@ imap <F2> <Esc> :tabnext <CR>i
 map <F2> :tabnext <CR>
 map <C-J> :bnext<CR>                     " Next buffer
 map <C-K> :bprev<CR>                     " Previous buffer
-map <C-L> :tabn<CR>                      " Next tab
-map <C-H> :tabp<CR>                      " Previous tab
+imap <C-L> :tabnext<CR>i
+imap <C-H> :tabprev<CR>i
 map <Leader>j :m +1 <CR>                 " Move line up
 map <Leader>k :m -2 <CR>                 " Move line down
 map <Leader>] :so $MYVIMRC<CR>
@@ -144,16 +160,17 @@ set pastetoggle=<F3>
 set showmode
 
 " Custom plugin mappings
-nnoremap <silent> <F9> :TagbarToggle<CR> " Toggle Tagbar
-map <leader>a :Ack                       " Quick ack search
-map <silent> <F5> :BookmarkToRoot        " NERDTree: add new bookmark
-map <silent> <F6> :NERDTreeFind<CR>      " NERDTree: open current file in tree
-map <silent> <F7> :NERDTreeToggle<CR>    " NERDTree: toogle tree
-map <Leader>m :Rmodel                    " Rails: open a model
-map <Leader>c :Rcontroller               " Rails: open a controller
-map <Leader>v :Rview                     " Rails: open a view
-map <Leader>r :CoffeeRun<CR>             " Execute coffescript
-map <leader>f :CtrlPTag<CR>              " Toggle ctrlp
+nnoremap <silent> <F9> :TagbarToggle<CR>   " Toggle Tagbar
+map <leader>a :Ack
+map <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
+map <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
+map <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
+map <silent> <F10> :EvervimNotebookList<CR>" Evernote: show notebooks
+map <Leader>m :Rmodel                      " Rails: open a model
+map <Leader>c :Rcontroller                 " Rails: open a controller
+map <Leader>v :Rview                       " Rails: open a view
+map <Leader>r :CoffeeRun<CR>               " Execute coffescript
+map <leader>f :CtrlPTag<CR>                " Toggle ctrlp
 
 " Change quotes type
 nnoremap <silent>'  :<C-U>call <SID>ToggleQuote()<CR>
@@ -176,10 +193,12 @@ sign define SIGN_CHANGED_VIM         text=M texthl=ChangedDefaultHl
 let NERDTreeWinSize=30
 let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
+let NERDTreeChDirMode=2
 
 " ctrlp configuration
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_extensions = ['tag']
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Syntastic configuration
 set statusline+=%#warningmsg#
@@ -194,6 +213,10 @@ runtime macros/matchit.vim
 
 " Quickly set ruby filetype
 command! FR set filetype=ruby
+
+" Ruby runner configuration:
+let g:RubyRunner_open_below = 1
+let g:RubyRunner_window_size = 10
 
 " vim-powerline configuration:
 let g:Powerline_cache_file = '/tmp/Powerline.cache'
@@ -216,6 +239,8 @@ function! s:ToggleQuote()
   endif
 endfunction
 
+" Disable folds in markdown files
+let g:vim_markdown_folding_disabled=1
 
 " coffescript tagbar
 if executable('coffeetags')
