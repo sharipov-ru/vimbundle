@@ -8,23 +8,24 @@ set softtabstop=2                              " 1 soft tab == 2 spaces
 set tabstop=2                                  " 1 hard tab == 2 spaces
 set shiftwidth=2                               " > and < commands shifts by 2
 set hlsearch
-set cursorline                                 " highlight the current line
-" set colorcolumn=80                             " show 80-digit limit line
+set cursorline cursorcolumn                    " highlight the current line and column
+" set colorcolumn=80                           " show 80-digit limit line
 set so=999
 set nocompatible                               " be iMproved
 set nofoldenable                               " turn off folding
+set nowrap                                     " turn off line wrapping
 set laststatus=2                               " always show status line
 set clipboard=unnamed
 
 syntax on
 filetype off                                   " required!
-colorscheme railscasts
 " set spell
 " setlocal spell spelllang=ru_yo,en_us
 " setlocal spell spelllang=ru_ru_yo,en_us
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 
 " Set ruby format for rabl files
 au BufRead,BufNewFile *.rabl setf ruby
@@ -47,6 +48,7 @@ Bundle 'scrooloose/syntastic'
 
 " ack search wrapper
 Bundle 'mileszs/ack.vim'
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Display changed lines with :Changed command
 Bundle 'taku-o/vim-changed'
@@ -66,8 +68,14 @@ Bundle 'tpope/vim-repeat'
 " Multiple cursors
 Bundle 'terryma/vim-multiple-cursors'
 
-" Powerline
-Bundle 'Lokaltog/vim-powerline'
+" Move lines
+Bundle 'matze/vim-move'
+
+" Easy line alignment
+Bundle 'junegunn/vim-easy-align'
+
+" Airline status bar
+Bundle 'bling/vim-airline'
 
 " Native increment for dates and times
 Bundle 'tpope/vim-speeddating'
@@ -91,6 +99,7 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 
 " Ruby/Rails/RSpec support
+Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
@@ -103,7 +112,6 @@ Bundle 'vim-scripts/Git-Branch-Info'
 Bundle 'kablamo/vim-git-log'
 Bundle 'gregsexton/gitv'
 Bundle 'mattn/gist-vim'
-" Bundle 'airblade/vim-gitgutter'
 
 " jQuery/Coffescript/LESS/SASS/SLIM/Zencoding support
 Bundle 'kchmck/vim-coffee-script'
@@ -130,9 +138,15 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'zeis/vim-kolor'
+Bundle 'tomasr/molokai'
 
 " Coloresque
 Bundle 'gorodinskiy/vim-coloresque'
+
+" 256 colors support
+set t_Co=256
+colorscheme kolor
 
 filetype on
 filetype indent on
@@ -140,18 +154,21 @@ filetype plugin on
 
 " Custom general mappings
 map 0 ^
-nnoremap <esc> :noh<return><esc>
+
+" Xuinya
+" nnoremap <esc> :noh<return><esc>
+
 nmap <F1> <Esc>                          " No help
 imap <F1> <Esc> :tabprev <CR>i
 map <F1> :tabprev <CR>
 imap <F2> <Esc> :tabnext <CR>i
 map <F2> :tabnext <CR>
-map <C-J> :bnext<CR>                     " Next buffer
-map <C-K> :bprev<CR>                     " Previous buffer
-imap <C-L> :tabnext<CR>i
-imap <C-H> :tabprev<CR>i
-map <Leader>j :m +1 <CR>                 " Move line up
-map <Leader>k :m -2 <CR>                 " Move line down
+" map <C-J> :bnext<CR>                     " Next buffer
+" map <C-K> :bprev<CR>                     " Previous buffer
+nnoremap <C-L> gt
+nnoremap <C-H> gT
+
+let g:move_key_modifier = 'C'
 map <Leader>] :so $MYVIMRC<CR>
 
 " paste mode
@@ -166,9 +183,9 @@ map <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
 map <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
 map <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
 map <silent> <F10> :EvervimNotebookList<CR>" Evernote: show notebooks
-map <Leader>m :Rmodel                      " Rails: open a model
-map <Leader>c :Rcontroller                 " Rails: open a controller
-map <Leader>v :Rview                       " Rails: open a view
+map <Leader>m :Emodel
+map <Leader>c :Econtroller
+map <Leader>v :Eview
 map <Leader>r :CoffeeRun<CR>               " Execute coffescript
 map <leader>f :CtrlPTag<CR>                " Toggle ctrlp
 
@@ -218,9 +235,9 @@ command! FR set filetype=ruby
 let g:RubyRunner_open_below = 1
 let g:RubyRunner_window_size = 10
 
-" vim-powerline configuration:
-let g:Powerline_cache_file = '/tmp/Powerline.cache'
-let g:Powerline_symbols = 'fancy'
+" vim-airline configuration:
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " Gitv configuration
 let g:Gitv_OpenHorizontal = 1

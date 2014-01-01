@@ -1,24 +1,26 @@
 set guioptions-=T
-set nowrap
 set vb t_vb=
 set showtabline=2
 set tabpagemax=15
+set linespace=2
+
 nmap ,t :tabnew<CR>
-map <M-1> 1gt
-map <M-2> 2gt
-map <M-3> 3gt
-map <M-4> 4gt
-map <M-5> 5gt
-map <M-6> 6gt
-map <M-7> 7gt
-map <M-8> 8gt
-map <M-9> 9gt
-colorscheme railscasts
+imap <C-L> :tabnext<CR>i
+imap <C-H> :tabprev<CR>i
+
+" colorscheme molokai
+" colorscheme kolor
+" colorscheme railscasts
+" colorscheme codeschool
+colorscheme kolor
 
 " vim-ruby-debugger configuration:
 let g:ruby_debugger_progname = 'mvim'
 
-set guifont=Monaco\ for\ Powerline:h12
+" Font
+" set guifont=Monaco:h12
+" set guifont=Source\ Code\ Pro\ For\ Powerline:h12
+set guifont=Anonymice\ Powerline:h14
 
 highlight diffAdded guifg=#00bf00
 highlight diffRemoved guifg=#bf0000
