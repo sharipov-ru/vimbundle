@@ -8,8 +8,11 @@ set softtabstop=2                              " 1 soft tab == 2 spaces
 set tabstop=2                                  " 1 hard tab == 2 spaces
 set shiftwidth=2                               " > and < commands shifts by 2
 set hlsearch
-set cursorline cursorcolumn                    " highlight the current line and column
+" set cursorline cursorcolumn                    " highlight the current line and column
 " set colorcolumn=80                           " show 80-digit limit line
+set ttyfast
+set lazyredraw
+
 set so=999
 set nocompatible                               " be iMproved
 set nofoldenable                               " turn off folding
@@ -31,7 +34,7 @@ call vundle#rc()
 au BufRead,BufNewFile *.rabl setf ruby
 
 " Open NERDTree when no file was specified
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter * if !argc() | NERDTree | endif
 
 " Compile coffee files
 " au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
@@ -49,9 +52,6 @@ Bundle 'scrooloose/syntastic'
 " ack search wrapper
 Bundle 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" Display changed lines with :Changed command
-Bundle 'taku-o/vim-changed'
 
 " Awesome fuzzy file/buffer/tag finder
 Bundle 'kien/ctrlp.vim'
@@ -125,12 +125,6 @@ Bundle 'slim-template/vim-slim'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'nelstrom/vim-markdown-preview'
 
-" web api
-Bundle 'mattn/webapi-vim'
-
-" evernote
-Bundle 'kakkyz81/evervim'
-
 " Text objects
 Bundle 'kana/vim-textobj-user'
 Bundle 'kana/vim-textobj-entire'
@@ -140,9 +134,6 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'zeis/vim-kolor'
 Bundle 'tomasr/molokai'
-
-" Coloresque
-Bundle 'gorodinskiy/vim-coloresque'
 
 " 256 colors support
 set t_Co=256
