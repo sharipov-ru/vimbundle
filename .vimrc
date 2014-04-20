@@ -19,6 +19,7 @@ set nofoldenable                               " turn off folding
 set nowrap                                     " turn off line wrapping
 set laststatus=2                               " always show status line
 set clipboard=unnamed
+set autoread
 
 syntax on
 filetype off                                   " required!
@@ -29,6 +30,7 @@ filetype off                                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+set cc=80
 
 " Set ruby format for rabl files
 au BufRead,BufNewFile *.rabl setf ruby
@@ -77,6 +79,8 @@ Bundle 'junegunn/vim-easy-align'
 " Airline status bar
 Bundle 'bling/vim-airline'
 
+Bundle 'tpope/vim-vinegar'
+
 " Native increment for dates and times
 Bundle 'tpope/vim-speeddating'
 
@@ -105,6 +109,7 @@ Bundle 'tpope/vim-rake'
 Bundle 'tpope/vim-bundler'
 Bundle 'henrik/vim-ruby-runner'
 Bundle 'skwp/vim-rspec'
+Bundle 'tpope/vim-rbenv'
 
 " Git tools
 Bundle 'tpope/vim-fugitive'
@@ -112,6 +117,7 @@ Bundle 'vim-scripts/Git-Branch-Info'
 Bundle 'kablamo/vim-git-log'
 Bundle 'gregsexton/gitv'
 Bundle 'mattn/gist-vim'
+Bundle 'mhinz/vim-signify'
 
 " jQuery/Coffescript/LESS/SASS/SLIM/Zencoding support
 Bundle 'kchmck/vim-coffee-script'
@@ -120,6 +126,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'firegoby/SASS-Snippets'
 Bundle 'mattn/zencoding-vim'
 Bundle 'slim-template/vim-slim'
+" Bundle 'digitaltoad/vim-jade'
 
 " markdown support
 Bundle 'plasticboy/vim-markdown'
@@ -134,6 +141,9 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'zeis/vim-kolor'
 Bundle 'tomasr/molokai'
+
+" Emoji
+Bundle 'junegunn/vim-emoji'
 
 " 256 colors support
 set t_Co=256
@@ -213,8 +223,11 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" let g:syntastic_debug=1
+" let g:syntastic_quiet_warnings=0
 let g:syntastic_auto_loc_list=1                 " automatically open/close Errors window
-let g:syntastic_quiet_warnings=1
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " Matchit (required by vim-textobj-rubyblock)
 runtime macros/matchit.vim
