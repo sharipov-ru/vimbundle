@@ -126,7 +126,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'firegoby/SASS-Snippets'
 Bundle 'mattn/zencoding-vim'
 Bundle 'slim-template/vim-slim'
-" Bundle 'digitaltoad/vim-jade'
+Bundle 'digitaltoad/vim-jade'
 
 " markdown support
 Bundle 'plasticboy/vim-markdown'
