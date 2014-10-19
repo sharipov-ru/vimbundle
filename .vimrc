@@ -1,45 +1,56 @@
-let mapletter = "\\"
-set bs=2
+" Important environment settings
+set nocompatible                               " be iMproved
+set shell=zsh
 set encoding=utf-8
+set clipboard=unnamed
+set t_Co=256                                   " 256 colors support
+set ttyfast
+set lazyredraw
+set nobackup
+set noswapfile
+set pastetoggle=<F3>
+set showmode
+set timeoutlen=2000
+set ttimeoutlen=0
+
+" Editor configuration
 set number                                     " show line numbers
-set ai
+set cc=80                                      " show 80-digit limit line
 set expandtab                                  " use spaces instead of tabs
+set bs=2
 set softtabstop=2                              " 1 soft tab == 2 spaces
 set tabstop=2                                  " 1 hard tab == 2 spaces
 set shiftwidth=2                               " > and < commands shifts by 2
-set hlsearch
-" set cursorline cursorcolumn                    " highlight the current line and column
-" set colorcolumn=80                           " show 80-digit limit line
-set ttyfast
-set lazyredraw
-
+set ai                                         " auto indent
+set hlsearch                                   " highlight search results
 set so=999
-set nocompatible                               " be iMproved
 set nofoldenable                               " turn off folding
 set nowrap                                     " turn off line wrapping
 set laststatus=2                               " always show status line
-set clipboard=unnamed
 set autoread
+set splitbelow                                 " move focus to new split below
+set splitright                                 " move focus to new split at right
 
-syntax on
-filetype off                                   " required!
+" set incsearch                                " show search matches as you type
 " set spell
 " setlocal spell spelllang=ru_yo,en_us
 " setlocal spell spelllang=ru_ru_yo,en_us
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-set cc=80
-
 " Set ruby format for rabl files
 au BufRead,BufNewFile *.rabl setf ruby
 
-" Open NERDTree when no file was specified
-" autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd FileType ruby setlocal path+=
 
 " Compile coffee files
 " au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
+
+" redraw on save
+" au BufWritePost * redraw!
+
+" set the runtime path to include Vundle and initialize
+filetype off                                   " required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#begin()
 
 " Plugin manager itself:
 Bundle 'gmarik/vundle'
@@ -102,24 +113,44 @@ Bundle 'scrooloose/nerdtree'
 " Tag bar with class/instance methods
 Bundle 'majutsushi/tagbar'
 
-" Ruby/Rails/RSpec support
+" Swap arguments
+Bundle 'PeterRincker/vim-argumentative'
+
+" one-liner / multi-line switcher
+Bundle 'AndrewRadev/splitjoin.vim'
+
+" Evernote
+Bundle 'https://github.com/neilagabriel/vim-geeknote'
+
+" Reveal in Finder
+Bundle 'henrik/vim-reveal-in-finder'
+
+" YouCompleteMe
+Bundle 'Valloric/YouCompleteMe'
+
+" Set path from ruby's `$LOAD_PATH` and add .rb suffix
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-rake'
+
+" Set path to include gems specified in Gemfile
 Bundle 'tpope/vim-bundler'
+
+" Set path to include lib/
+Bundle 'tpope/vim-rake'
+Bundle 'tpope/vim-rails'
 Bundle 'henrik/vim-ruby-runner'
 Bundle 'skwp/vim-rspec'
 Bundle 'tpope/vim-rbenv'
 
 " Git tools
 Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/Git-Branch-Info'
+" Bundle 'vim-scripts/Git-Branch-Info'
 Bundle 'kablamo/vim-git-log'
 Bundle 'gregsexton/gitv'
 Bundle 'mattn/gist-vim'
 Bundle 'mhinz/vim-signify'
+Bundle 'idanarye/vim-merginal'
 
-" jQuery/Coffescript/LESS/SASS/SLIM/Zencoding support
+" frontend tools support
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'itspriddle/vim-jquery'
 Bundle 'groenewege/vim-less'
@@ -127,6 +158,8 @@ Bundle 'firegoby/SASS-Snippets'
 Bundle 'mattn/zencoding-vim'
 Bundle 'slim-template/vim-slim'
 Bundle 'digitaltoad/vim-jade'
+Bundle 'zoeesilcock/vim-caniuse'
+Bundle 'Shutnik/jshint2.vim'
 
 " markdown support
 Bundle 'plasticboy/vim-markdown'
@@ -145,50 +178,49 @@ Bundle 'tomasr/molokai'
 " Emoji
 Bundle 'junegunn/vim-emoji'
 
-" 256 colors support
-set t_Co=256
-colorscheme kolor
+" Tmux integration
+Bundle 'christoomey/vim-tmux-navigator'
 
-filetype on
+call vundle#end()
+
+syntax on
+colorscheme kolor
 filetype indent on
 filetype plugin on
 
+runtime macros/matchit.vim                 " Matchit (required by vim-textobj-rubyblock)
+
 " Custom general mappings
 map 0 ^
-
-" Xuinya
-" nnoremap <esc> :noh<return><esc>
-
-nmap <F1> <Esc>                          " No help
+map 1 $
 imap <F1> <Esc> :tabprev <CR>i
 map <F1> :tabprev <CR>
 imap <F2> <Esc> :tabnext <CR>i
 map <F2> :tabnext <CR>
-" map <C-J> :bnext<CR>                     " Next buffer
-" map <C-K> :bprev<CR>                     " Previous buffer
-nnoremap <C-L> gt
-nnoremap <C-H> gT
 
-let g:move_key_modifier = 'C'
-map <Leader>] :so $MYVIMRC<CR>
-
-" paste mode
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nnoremap <S-H> gT
+nnoremap <S-L> gt
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 nnoremap <F3> :set invpaste paste?<CR>
-set pastetoggle=<F3>
-set showmode
 
 " Custom plugin mappings
+let g:move_key_modifier = 'S'              " Move_key_modifier
 nnoremap <silent> <F9> :TagbarToggle<CR>   " Toggle Tagbar
-map <leader>a :Ack
-map <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
-map <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
-map <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
-map <silent> <F10> :EvervimNotebookList<CR>" Evernote: show notebooks
-map <Leader>m :Emodel
-map <Leader>c :Econtroller
-map <Leader>v :Eview
-map <Leader>r :CoffeeRun<CR>               " Execute coffescript
-map <leader>f :CtrlPTag<CR>                " Toggle ctrlp
+nnoremap <leader>a :Ack
+nnoremap <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
+nnoremap <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
+nnoremap <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
+nnoremap <silent> <F10> :EvervimNotebookList<CR>" Evernote: show notebooks
+nnoremap <Leader>m :Emodel
+nnoremap <Leader>c :Econtroller
+nnoremap <Leader>v :Eview
+nnoremap <Leader>r :CoffeeRun<CR>               " Execute coffescript
+nnoremap <leader>f :CtrlPTag<CR>                " Toggle ctrlp
 
 " Change quotes type
 nnoremap <silent>'  :<C-U>call <SID>ToggleQuote()<CR>
@@ -202,7 +234,7 @@ silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 " map <silent> <F8> :Gitv<CR>
 " map <silent> <F6> :call GITLOG_ToggleWindows()
 
-" Changed configuration
+" vim-changed configuration
 sign define SIGN_CHANGED_DELETED_VIM text=D texthl=ChangedDefaultHl
 sign define SIGN_CHANGED_ADDED_VIM   text=A texthl=ChangedDefaultHl
 sign define SIGN_CHANGED_VIM         text=M texthl=ChangedDefaultHl
@@ -222,15 +254,12 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 " let g:syntastic_debug=1
 " let g:syntastic_quiet_warnings=0
-let g:syntastic_auto_loc_list=1                 " automatically open/close Errors window
+let g:syntastic_auto_loc_list=1
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-
-" Matchit (required by vim-textobj-rubyblock)
-runtime macros/matchit.vim
+" let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+let g:syntastic_ruby_checkers = ['mri']
 
 " Quickly set ruby filetype
 command! FR set filetype=ruby
@@ -242,9 +271,25 @@ let g:RubyRunner_window_size = 10
 " vim-airline configuration:
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#bufferline#enabled = 1
 
 " Gitv configuration
 let g:Gitv_OpenHorizontal = 1
+
+" Geeknote
+let g:GeeknoteExplorerWidth=50
+
+" Caniuse configuration
+nmap <leader>css <Plug>Ncaniuse
+
+function! s:BufSyntax()
+  if (!exists("g:rails_syntax") || g:rails_syntax)
+    if &syntax == 'ruby'
+      syn keyword rubyRailsInclude require_dependency gem
+    endif
+  endif
+endfunction
 
 " change quote types
 function! s:ToggleQuote()
@@ -279,6 +324,3 @@ if executable('coffeetags')
         \ }
         \ }
 endif
-
-" set langmap for input russian characters in normal mode
-set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
