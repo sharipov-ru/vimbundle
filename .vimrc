@@ -49,137 +49,140 @@ au BufRead,BufNewFile *.rabl setf ruby
 
 " set the runtime path to include Vundle and initialize
 filetype off                                   " required!
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
 " Plugin manager itself:
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " Utils
-Bundle 'genutils'
-Bundle 'L9'
+Plugin 'genutils'
+Plugin 'L9'
 
 " Syntax checker
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
 " ack search wrapper
-Bundle 'mileszs/ack.vim'
+Plugin 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Awesome fuzzy file/buffer/tag finder
-Bundle 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Automatically add 'end' in ruby code
-Bundle 'tpope/vim-endwise'
+Plugin 'tpope/vim-endwise'
 
 " Surround brackets, quotes and so on...
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " Extended repeat (.) command
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " Multiple cursors
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'
 
 " Move lines
-Bundle 'matze/vim-move'
+Plugin 'matze/vim-move'
 
 " Easy line alignment
-Bundle 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 
 " Airline status bar
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
-Bundle 'tpope/vim-vinegar'
+Plugin 'tpope/vim-vinegar'
 
 " Native increment for dates and times
-Bundle 'tpope/vim-speeddating'
+Plugin 'tpope/vim-speeddating'
 
 " Easy lines commenting
-Bundle 'vim-scripts/tComment'
+Plugin 'vim-scripts/tComment'
 
 " Autocompletion
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 
 " Pairs of handy bracket mappings
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 
 " Sidebar with tree explorer
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 " Tag bar with class/instance methods
-Bundle 'majutsushi/tagbar'
+Plugin 'majutsushi/tagbar'
 
 " Swap arguments
-Bundle 'PeterRincker/vim-argumentative'
+Plugin 'PeterRincker/vim-argumentative'
 
 " one-liner / multi-line switcher
-Bundle 'AndrewRadev/splitjoin.vim'
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " Evernote
-Bundle 'https://github.com/neilagabriel/vim-geeknote'
+Plugin 'https://github.com/neilagabriel/vim-geeknote'
 
 " Reveal in Finder
-Bundle 'henrik/vim-reveal-in-finder'
+Plugin 'henrik/vim-reveal-in-finder'
 
 " YouCompleteMe
-Bundle 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Set path from ruby's `$LOAD_PATH` and add .rb suffix
-Bundle 'vim-ruby/vim-ruby'
+Plugin 'vim-ruby/vim-ruby'
 
 " Set path to include gems specified in Gemfile
-Bundle 'tpope/vim-bundler'
+Plugin 'tpope/vim-bundler'
 
 " Set path to include lib/
-Bundle 'tpope/vim-rake'
-Bundle 'tpope/vim-rails'
-Bundle 'henrik/vim-ruby-runner'
-Bundle 'skwp/vim-rspec'
-Bundle 'tpope/vim-rbenv'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-rails'
+Plugin 'henrik/vim-ruby-runner'
+Plugin 'skwp/vim-rspec'
+Plugin 'tpope/vim-rbenv'
 
 " Git tools
-Bundle 'tpope/vim-fugitive'
-" Bundle 'vim-scripts/Git-Branch-Info'
-Bundle 'kablamo/vim-git-log'
-Bundle 'gregsexton/gitv'
-Bundle 'mattn/gist-vim'
-Bundle 'mhinz/vim-signify'
-Bundle 'idanarye/vim-merginal'
+Plugin 'tpope/vim-fugitive'
+" PlugiPlugin-scripts/Git-Branch-Info'
+Plugin 'kablamo/vim-git-log'
+Plugin 'gregsexton/gitv'
+Plugin 'mattn/gist-vim'
+Plugin 'mhinz/vim-signify'
+Plugin 'idanarye/vim-merginal'
 
 " frontend tools support
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'itspriddle/vim-jquery'
-Bundle 'groenewege/vim-less'
-Bundle 'firegoby/SASS-Snippets'
-Bundle 'mattn/zencoding-vim'
-Bundle 'slim-template/vim-slim'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'zoeesilcock/vim-caniuse'
-Bundle 'Shutnik/jshint2.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'itspriddle/vim-jquery'
+Plugin 'groenewege/vim-less'
+Plugin 'firegoby/SASS-Snippets'
+" Plugin 'mattn/zencoding-vim'
+Plugin 'slim-template/vim-slim'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'zoeesilcock/vim-caniuse'
+Plugin 'Shutnik/jshint2.vim'
 
 " markdown support
-Bundle 'plasticboy/vim-markdown'
-Bundle 'nelstrom/vim-markdown-preview'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'nelstrom/vim-markdown-preview'
 
 " Text objects
-Bundle 'kana/vim-textobj-user'
-Bundle 'kana/vim-textobj-entire'
-Bundle 'nelstrom/vim-textobj-rubyblock'
+Plugin 'kana/vim-textobj-user'
+Plugin 'kana/vim-textobj-entire'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " Colorschemes
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'zeis/vim-kolor'
-Bundle 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'zeis/vim-kolor'
+Plugin 'tomasr/molokai'
 
 " Emoji
-Bundle 'junegunn/vim-emoji'
+Plugin 'junegunn/vim-emoji'
 
 " Tmux integration
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
