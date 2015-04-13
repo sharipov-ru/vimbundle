@@ -190,6 +190,9 @@ Plugin 'junegunn/vim-emoji'
 " Tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
 
+" Docker
+Plugin 'ekalinin/Dockerfile.vim'
+
 call vundle#end()
 
 syntax on
