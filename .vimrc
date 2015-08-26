@@ -137,6 +137,9 @@ Plugin 'vim-ruby/vim-ruby'
 " Set path to include gems specified in Gemfile
 Plugin 'tpope/vim-bundler'
 
+" Auto :set paste
+Plugin 'ConradIrwin/vim-bracketed-paste'
+
 " Set path to include lib/
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-rails'
@@ -146,7 +149,7 @@ Plugin 'tpope/vim-rbenv'
 
 " Git tools
 Plugin 'tpope/vim-fugitive'
-" PlugiPlugin-scripts/Git-Branch-Info'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'kablamo/vim-git-log'
 Plugin 'gregsexton/gitv'
 Plugin 'mattn/gist-vim'
@@ -158,7 +161,6 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'itspriddle/vim-jquery'
 Plugin 'groenewege/vim-less'
 Plugin 'firegoby/SASS-Snippets'
-" Plugin 'mattn/zencoding-vim'
 Plugin 'slim-template/vim-slim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'zoeesilcock/vim-caniuse'
@@ -223,7 +225,7 @@ nnoremap <F3> :set invpaste paste?<CR>
 " Custom plugin mappings
 let g:move_key_modifier = 'S'              " Move_key_modifier
 nnoremap <silent> <F9> :TagbarToggle<CR>   " Toggle Tagbar
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack<Space>
 nnoremap <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
 nnoremap <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
 nnoremap <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
@@ -343,3 +345,5 @@ if &term =~ '256color'
     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
+
+set path+=~/rails/pulse/app
