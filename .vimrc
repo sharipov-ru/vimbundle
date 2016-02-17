@@ -236,6 +236,9 @@ nnoremap <Leader>v :Eview
 nnoremap <Leader>r :CoffeeRun<CR>               " Execute coffescript
 nnoremap <leader>f :CtrlPTag<CR>                " Toggle ctrlp
 
+" Puts caller
+nnoremap <leader>wtf oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
+
 " Change quotes type
 nnoremap <silent>'  :<C-U>call <SID>ToggleQuote()<CR>
 
