@@ -13,12 +13,16 @@ Create backup of your old vimfiles:
 
 Clone this repository to ``.vim`` directory of your homedir:
 
-    git clone git@github.com:sharipov-ru/vimbundle.git ~/.vim
+    git clone https://github.com/sharipov-ru/vimbundle.git ~/.vim
 
 Create symlinks for .vimrc and .gvimrc:
 
     ln -s ~/.vim/.vimrc ~/.vimrc
     ln -s ~/.vim/.gvimrc ~/.gvimrc
+    
+Install plugin manager:
+
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 Open vim/mvim/gvim and execute comand:
 
