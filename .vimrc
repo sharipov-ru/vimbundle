@@ -350,7 +350,9 @@ function! DoPrettyXML()
   " restore the filetype
   exe "set ft=" . l:origft
 endfunction
+
 command! PrettyXML call DoPrettyXML()
+command! PrettyJSON %!python -m json.tool
 
 " Disable folds in markdown files
 let g:vim_markdown_folding_disabled=1
