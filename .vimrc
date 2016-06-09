@@ -30,6 +30,7 @@ set laststatus=2                               " always show status line
 set autoread
 set splitbelow                                 " move focus to new split below
 set splitright                                 " move focus to new split at right
+set shell=bash\ -i
 
 " set incsearch                                " show search matches as you type
 " set spell
@@ -168,7 +169,7 @@ Plugin 'Shutnik/jshint2.vim'
 
 " markdown support
 Plugin 'plasticboy/vim-markdown'
-Plugin 'nelstrom/vim-markdown-preview'
+Plugin 'suan/vim-instant-markdown'
 
 " Text objects
 Plugin 'kana/vim-textobj-user'
