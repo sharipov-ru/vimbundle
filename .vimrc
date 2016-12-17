@@ -145,8 +145,10 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-rails'
 Plugin 'henrik/vim-ruby-runner'
-Plugin 'skwp/vim-rspec'
+" Plugin 'skwp/vim-rspec'
 Plugin 'tpope/vim-rbenv'
+
+Plugin 'thoughtbot/vim-rspec'
 
 " Git tools
 Plugin 'tpope/vim-fugitive'
@@ -383,3 +385,11 @@ if &term =~ '256color'
 endif
 
 set path+=~/rails/pulse/app
+ab bb require 'byebug'; byebug
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+map <Leader>b binding.pry<ESC>
