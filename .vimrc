@@ -15,7 +15,7 @@ set ttimeoutlen=0
 
 " Editor configuration
 set number                                     " show line numbers
-set cc=80                                      " show 80-digit limit line
+set cc=100                                      " show 80-digit limit line
 set expandtab                                  " use spaces instead of tabs
 set bs=2
 set softtabstop=2                              " 1 soft tab == 2 spaces
@@ -32,7 +32,6 @@ set splitbelow                                 " move focus to new split below
 set splitright                                 " move focus to new split at right
 set shell=bash\ -i
 
-" set incsearch                                " show search matches as you type
 " set spell
 " setlocal spell spelllang=ru_yo,en_us
 " setlocal spell spelllang=ru_ru_yo,en_us
@@ -42,163 +41,143 @@ au BufRead,BufNewFile *.rabl setf ruby
 
 " autocmd FileType ruby setlocal path+=
 
-" Compile coffee files
-" au BufWritePost *.coffee silent CoffeeMake! -b | cwindow | redraw!
-
-" redraw on save
-" au BufWritePost * redraw!
-
-" set the runtime path to include Vundle and initialize
 filetype off                                   " required!
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" Plugin manager itself:
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " Utils
-Plugin 'genutils'
-Plugin 'L9'
+" Plug 'genutils'
+" Plug 'L9'
 
 " Syntax checker
-Plugin 'scrooloose/syntastic'
-
-" ack search wrapper
-Plugin 'mileszs/ack.vim'
-let g:ackprg = 'ag --nogroup --nocolor --column'
+" Plug 'w0rp/ale'
 
 " Awesome fuzzy file/buffer/tag finder
-Plugin 'kien/ctrlp.vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 " Automatically add 'end' in ruby code
-Plugin 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 
 " Surround brackets, quotes and so on...
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " Extended repeat (.) command
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Multiple cursors
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 " Move lines
-Plugin 'matze/vim-move'
+Plug 'matze/vim-move'
 
 " Easy line alignment
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " Airline status bar
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 
-Plugin 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 
 " Native increment for dates and times
-Plugin 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
 
 " Easy lines commenting
-Plugin 'vim-scripts/tComment'
+Plug 'vim-scripts/tComment'
 
 " Autocompletion
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 " Pairs of handy bracket mappings
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
 " Sidebar with tree explorer
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " Tag bar with class/instance methods
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Swap arguments
-Plugin 'PeterRincker/vim-argumentative'
+Plug 'PeterRincker/vim-argumentative'
 
 " one-liner / multi-line switcher
-Plugin 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Evernote
-Plugin 'https://github.com/neilagabriel/vim-geeknote'
+Plug 'https://github.com/neilagabriel/vim-geeknote'
 
 " Reveal in Finder
-Plugin 'henrik/vim-reveal-in-finder'
+Plug 'henrik/vim-reveal-in-finder'
 
 " YouCompleteMe
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " Set path from ruby's `$LOAD_PATH` and add .rb suffix
-Plugin 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 
 " Set path to include gems specified in Gemfile
-Plugin 'tpope/vim-bundler'
+Plug 'tpope/vim-bundler'
 
 " Auto :set paste
-Plugin 'ConradIrwin/vim-bracketed-paste'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Set path to include lib/
-Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-rails'
-Plugin 'henrik/vim-ruby-runner'
-" Plugin 'skwp/vim-rspec'
-Plugin 'tpope/vim-rbenv'
-
-Plugin 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-rake'
+" Plug 'tpope/vim-rails'
+Plug 'henrik/vim-ruby-runner'
+Plug 'tpope/vim-rbenv'
+Plug 'thoughtbot/vim-rspec'
 
 " Git tools
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'kablamo/vim-git-log'
-Plugin 'gregsexton/gitv'
-Plugin 'mattn/gist-vim'
-Plugin 'mhinz/vim-signify'
-Plugin 'idanarye/vim-merginal'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'kablamo/vim-git-log'
+Plug 'gregsexton/gitv'
+Plug 'mattn/gist-vim'
+Plug 'mhinz/vim-signify'
+Plug 'idanarye/vim-merginal'
 
 " frontend tools support
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'itspriddle/vim-jquery'
-Plugin 'groenewege/vim-less'
-Plugin 'firegoby/SASS-Snippets'
-Plugin 'slim-template/vim-slim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'zoeesilcock/vim-caniuse'
-Plugin 'Shutnik/jshint2.vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'itspriddle/vim-jquery'
+Plug 'groenewege/vim-less'
+Plug 'firegoby/SASS-Snippets'
+Plug 'slim-template/vim-slim'
+Plug 'digitaltoad/vim-jade'
+Plug 'Shutnik/jshint2.vim'
 
 " markdown support
-Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
 
 " Text objects
-Plugin 'kana/vim-textobj-user'
-Plugin 'kana/vim-textobj-entire'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Colorschemes
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'zeis/vim-kolor'
-Plugin 'tomasr/molokai'
-Plugin 'duythinht/inori'
-Plugin 'wellsjo/wells-colorscheme.vim'
-Plugin 'cdmedia/itg_flat_vim'
-Plugin 'benjaminwhite/Benokai'
-Plugin 'duythinht/vim-coffee'
-Plugin 'sickill/vim-monokai'
+Plug 'altercation/vim-colors-solarized'
+Plug 'zeis/vim-kolor'
+Plug 'tomasr/molokai'
+Plug 'duythinht/inori'
+Plug 'wellsjo/wells-colorscheme.vim'
+Plug 'cdmedia/itg_flat_vim'
+Plug 'benjaminwhite/Benokai'
+Plug 'duythinht/vim-coffee'
+Plug 'sickill/vim-monokai'
 
 " Emoji
-Plugin 'junegunn/vim-emoji'
+Plug 'junegunn/vim-emoji'
 
 " Tmux integration
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Docker
-Plugin 'ekalinin/Dockerfile.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
-call vundle#end()
+call plug#end()
 
 syntax on
 colorscheme kolor
@@ -228,16 +207,16 @@ nnoremap <F3> :set invpaste paste?<CR>
 " Custom plugin mappings
 let g:move_key_modifier = 'S'              " Move_key_modifier
 nnoremap <silent> <F9> :TagbarToggle<CR>   " Toggle Tagbar
-nnoremap <leader>a :Ack<Space>
 nnoremap <silent> <F5> :BookmarkToRoot          " NERDTree: add new bookmark
 nnoremap <silent> <F6> :NERDTreeFind<CR>        " NERDTree: open current file in tree
 nnoremap <silent> <F7> :NERDTreeToggle<CR>      " NERDTree: toogle tree
 nnoremap <silent> <F10> :EvervimNotebookList<CR>" Evernote: show notebooks
-nnoremap <Leader>m :Emodel
-nnoremap <Leader>c :Econtroller
-nnoremap <Leader>v :Eview
-nnoremap <Leader>r :CoffeeRun<CR>               " Execute coffescript
-nnoremap <leader>f :CtrlPTag<CR>                " Toggle ctrlp
+nnoremap <C-p> :Files<CR>
+nnoremap <Leader>a :Ag 
+nnoremap <Leader>t :Ag<CR>
+nnoremap <Leader>b :Buffers<CR>
+" nnoremap <leader>f :CtrlPTag<CR>                " Toggle ctrlp
+" nnoremap <leader>f :CtrlPTag<CR>                " Toggle ctrlp
 
 " Puts caller
 nnoremap <leader>wtf oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc>
@@ -251,9 +230,6 @@ map <Leader>h :%s/:\(\w\+\)\(\s*=>\s*\)/\1: /gc
 " vim repeat command by .
 silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
 
-" map <silent> <F8> :Gitv<CR>
-" map <silent> <F6> :call GITLOG_ToggleWindows()
-
 " vim-changed configuration
 sign define SIGN_CHANGED_DELETED_VIM text=D texthl=ChangedDefaultHl
 sign define SIGN_CHANGED_ADDED_VIM   text=A texthl=ChangedDefaultHl
@@ -265,24 +241,10 @@ let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 let NERDTreeChDirMode=2
 
-" ctrlp configuration
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_extensions = ['tag']
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-
-" Syntastic configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" let g:syntastic_debug=1
-" let g:syntastic_quiet_warnings=0
-let g:syntastic_auto_loc_list=1
-let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_ruby_checkers = ['mri']
-
-" Quickly set ruby filetype
-command! FR set filetype=ruby
+" ale configuration:
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
 " Ruby runner configuration:
 let g:RubyRunner_open_below = 1
@@ -299,9 +261,6 @@ let g:Gitv_OpenHorizontal = 1
 
 " Geeknote
 let g:GeeknoteExplorerWidth=50
-
-" Caniuse configuration
-nmap <leader>css <Plug>Ncaniuse
 
 function! s:BufSyntax()
   if (!exists("g:rails_syntax") || g:rails_syntax)
@@ -354,28 +313,12 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 
+command! FR set filetype=ruby
 command! PrettyXML call DoPrettyXML()
 command! PrettyJSON %!python -m json.tool
 
 " Disable folds in markdown files
 let g:vim_markdown_folding_disabled=1
-
-" coffescript tagbar
-if executable('coffeetags')
-  let g:tagbar_type_coffee = {
-        \ 'ctagsbin' : 'coffeetags',
-        \ 'ctagsargs' : '--include-vars',
-        \ 'kinds' : [
-        \ 'f:functions',
-        \ 'o:object',
-        \ ],
-        \ 'sro' : ".",
-        \ 'kind2scope' : {
-        \ 'f' : 'object',
-        \ 'o' : 'object',
-        \ }
-        \ }
-endif
 
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
@@ -384,12 +327,10 @@ if &term =~ '256color'
     set t_ut=
 endif
 
-set path+=~/rails/pulse/app
 ab bb require 'byebug'; byebug
 
 " RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>b binding.pry<ESC>
+nnoremap <C-\>> :cnext<CR>
+nnoremap <C-\<> :cprev<CR>
